@@ -20,4 +20,15 @@ public class Rating {
     public Long getRestaurantId() { return restaurantId; }
     public int getRating() { return rating; }
     public String getComment() { return comment; }
+
+    @Override
+    public String toString() {
+        return "Rating{" +
+                "id=" + id +
+                ", visitorId=" + visitorId +
+                ", restaurantId=" + restaurantId +
+                ", rating=" + rating +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }

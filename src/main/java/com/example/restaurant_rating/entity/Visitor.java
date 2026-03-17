@@ -17,4 +17,14 @@ public class Visitor {
     public String getName() { return name; }
     public Integer getAge() { return age; }
     public String getGender() { return gender; }
+
+    @Override
+    public String toString() {
+        return "Visitor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                '}';
+    }
 }

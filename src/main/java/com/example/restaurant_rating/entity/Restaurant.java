@@ -25,4 +25,16 @@ public class Restaurant {
     public BigDecimal getAverageBill() { return averageBill; }
     public BigDecimal getAverageRating() { return averageRating; }
     public void setAverageRating(BigDecimal averageRating) { this.averageRating = averageRating; }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", cuisineType=" + cuisineType +
+                ", averageBill=" + averageBill +
+                ", averageRating=" + averageRating +
+                '}';
+    }
 }
