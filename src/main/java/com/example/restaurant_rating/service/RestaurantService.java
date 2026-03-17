@@ -1,9 +1,9 @@
-package com.example.restaurantrating.service;
+package com.example.restaurant_rating.service;
 
-import com.example.restaurantrating.entity.Restaurant;
-import com.example.restaurantrating.entity.Rating;
-import com.example.restaurantrating.repository.RestaurantRepository;
-import com.example.restaurantrating.repository.RatingRepository;
+import com.example.restaurant_rating.entity.Restaurant;
+import com.example.restaurant_rating.entity.Rating;
+import com.example.restaurant_rating.repository.RestaurantRepository;
+import com.example.restaurant_rating.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;

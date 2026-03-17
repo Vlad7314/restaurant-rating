@@ -1,6 +1,6 @@
-package com.example.restaurantrating.repository;
+package com.example.restaurant_rating.repository;
 
-import com.example.restaurantrating.entity.Restaurant;
+import com.example.restaurant_rating.entity.Restaurant;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;

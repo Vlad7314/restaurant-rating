@@ -1,7 +1,7 @@
-package com.example.restaurantrating.service;
+package com.example.restaurant_rating.service;
 
-import com.example.restaurantrating.entity.Visitor;
-import com.example.restaurantrating.repository.VisitorRepository;
+import com.example.restaurant_rating.entity.Visitor;
+import com.example.restaurant_rating.repository.VisitorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.example.restaurantrating.repository;
+package com.example.restaurant_rating.repository;
 
-import com.example.restaurantrating.entity.Rating;
+import com.example.restaurant_rating.entity.Rating;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,6 @@ public class RatingRepository {
         return ratings.stream().filter(r -> r.getId().equals(id)).findFirst();
     }
 
-    // Дополнительный метод для поиска всех оценок конкретного ресторана
     public List<Rating> findByRestaurantId(Long restaurantId) {
         return ratings.stream()
                 .filter(r -> r.getRestaurantId().equals(restaurantId))

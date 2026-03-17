@@ -1,7 +1,7 @@
-package com.example.restaurantrating.service;
+package com.example.restaurant_rating.service;
 
-import com.example.restaurantrating.entity.Rating;
-import com.example.restaurantrating.repository.RatingRepository;
+import com.example.restaurant_rating.entity.Rating;
+import com.example.restaurant_rating.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RatingService {
     private final RatingRepository ratingRepository;
-    private final RestaurantService restaurantService; 
+    private final RestaurantService restaurantService;
 
     public Rating save(Rating rating) {
         Rating saved = ratingRepository.save(rating);

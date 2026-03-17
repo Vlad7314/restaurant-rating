@@ -1,10 +1,10 @@
-package com.example.restaurantrating.util;
+package com.example.restaurant_rating.util;
 
-import com.example.restaurantrating.entity.*;
-import com.example.restaurantrating.service.*;
+import com.example.restaurant_rating.entity.*;
+import com.example.restaurant_rating.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.math.BigDecimal;
 
 @Component
@@ -20,7 +20,7 @@ public class DataInitializer {
 
         Visitor v1 = visitorService.save(new Visitor(null, "Иван", 25, "M"));
         Visitor v2 = visitorService.save(new Visitor(null, "Мария", 30, "F"));
-        Visitor v3 = visitorService.save(new Visitor(null, null, 22, "OTHER")); // аноним
+        Visitor v3 = visitorService.save(new Visitor(null, null, 22, "OTHER")); 
 
         System.out.println("Посетители: " + visitorService.findAll());
 
