@@ -6,7 +6,6 @@ import com.example.restaurant_rating.entity.Restaurant;
 import com.example.restaurant_rating.entity.Rating;
 import com.example.restaurant_rating.repository.RestaurantRepository;
 import com.example.restaurant_rating.repository.RatingRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,11 +13,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final RatingRepository ratingRepository;
 
+    public RestaurantService(RestaurantRepository restaurantRepository, RatingRepository ratingRepository) {
+        this.restaurantRepository = restaurantRepository;
+        this.ratingRepository = ratingRepository;
+    }
 
     public RestaurantResponseDTO save(RestaurantRequestDTO dto) {
         Restaurant restaurant = new Restaurant(null, dto.name(), dto.description(), dto.cuisineType(), dto.averageBill());
@@ -31,12 +33,12 @@ public class RestaurantService {
                 .orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
         Restaurant updated = new Restaurant(id, dto.name(), dto.description(), dto.cuisineType(), dto.averageBill());
         updated.setAverageRating(existing.getAverageRating());
-        restaurantRepository.update(updated);
-        return mapToDTO(updated);
+        Restaurant saved = restaurantRepository.save(updated);
+        return mapToDTO(saved);
     }
 
     public void remove(Long id) {
-        restaurantRepository.remove(id);
+        restaurantRepository.deleteById(id);
     }
 
     public List<RestaurantResponseDTO> findAll() {
@@ -51,7 +53,6 @@ public class RestaurantService {
                 .orElse(null);
     }
 
-  
     public void recalculateAverageRating(Long restaurantId) {
         List<Rating> ratings = ratingRepository.findByRestaurantId(restaurantId);
         double average = ratings.stream()
@@ -61,7 +62,7 @@ public class RestaurantService {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new IllegalArgumentException("Ресторан не найден"));
         restaurant.setAverageRating(BigDecimal.valueOf(average));
-        restaurantRepository.update(restaurant);
+        restaurantRepository.save(restaurant);
     }
 
     private RestaurantResponseDTO mapToDTO(Restaurant restaurant) {

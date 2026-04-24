@@ -5,7 +5,6 @@ import com.example.restaurant_rating.dto.RestaurantResponseDTO;
 import com.example.restaurant_rating.service.RestaurantService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +13,27 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/restaurants")
-@RequiredArgsConstructor
 @Tag(name = "Restaurants", description = "Управление ресторанами")
 public class RestaurantController {
     private final RestaurantService restaurantService;
 
-@GetMapping
-public List<RestaurantResponseDTO> getAll() {
-    return restaurantService.findAll();
-}
+    public RestaurantController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
+    }
 
-@GetMapping("/{id}")
-public ResponseEntity<RestaurantResponseDTO> getById(@PathVariable Long id) {
-    RestaurantResponseDTO dto = restaurantService.findById(id);
-    return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
-}
+    @GetMapping
+    @Operation(summary = "Получить все рестораны")
+    public List<RestaurantResponseDTO> getAll() {
+        return restaurantService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Получить ресторан по ID")
+    public ResponseEntity<RestaurantResponseDTO> getById(@PathVariable Long id) {
+        RestaurantResponseDTO dto = restaurantService.findById(id);
+        return dto != null ? ResponseEntity.ok(dto) : ResponseEntity.notFound().build();
+    }
+
     @PostMapping
     @Operation(summary = "Создать ресторан")
     public ResponseEntity<RestaurantResponseDTO> create(@RequestBody RestaurantRequestDTO dto) {

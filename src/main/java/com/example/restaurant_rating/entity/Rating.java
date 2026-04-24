@@ -1,11 +1,19 @@
 package com.example.restaurant_rating.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "ratings")
 public class Rating {
-    private final Long id;
-    private final Long visitorId;
-    private final Long restaurantId;
-    private final int rating;
-    private final String comment;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long visitorId;
+    private Long restaurantId;
+    private int rating;
+    private String comment;
+
+    public Rating() {}
 
     public Rating(Long id, Long visitorId, Long restaurantId, int rating, String comment) {
         this.id = id;
@@ -16,19 +24,13 @@ public class Rating {
     }
 
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
     public Long getVisitorId() { return visitorId; }
+    public void setVisitorId(Long visitorId) { this.visitorId = visitorId; }
     public Long getRestaurantId() { return restaurantId; }
+    public void setRestaurantId(Long restaurantId) { this.restaurantId = restaurantId; }
     public int getRating() { return rating; }
+    public void setRating(int rating) { this.rating = rating; }
     public String getComment() { return comment; }
-
-    @Override
-    public String toString() {
-        return "Rating{" +
-                "id=" + id +
-                ", visitorId=" + visitorId +
-                ", restaurantId=" + restaurantId +
-                ", rating=" + rating +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
+    public void setComment(String comment) { this.comment = comment; }
 }

@@ -4,16 +4,19 @@ import com.example.restaurant_rating.dto.UserRequestDTO;
 import com.example.restaurant_rating.dto.UserResponseDTO;
 import com.example.restaurant_rating.entity.Visitor;
 import com.example.restaurant_rating.repository.VisitorRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class VisitorService {
     private final VisitorRepository visitorRepository;
+
+    // Конструктор для внедрения зависимости
+    public VisitorService(VisitorRepository visitorRepository) {
+        this.visitorRepository = visitorRepository;
+    }
 
     public UserResponseDTO save(UserRequestDTO dto) {
         Visitor visitor = new Visitor(null, dto.name(), dto.age(), dto.gender());
@@ -22,7 +25,11 @@ public class VisitorService {
     }
 
     public boolean remove(Long id) {
-        return visitorRepository.remove(id);
+        if (visitorRepository.existsById(id)) {
+            visitorRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     public List<UserResponseDTO> findAll() {

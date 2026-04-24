@@ -4,7 +4,6 @@ import com.example.restaurant_rating.dto.ReviewRequestDTO;
 import com.example.restaurant_rating.dto.ReviewResponseDTO;
 import com.example.restaurant_rating.entity.Rating;
 import com.example.restaurant_rating.repository.RatingRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +11,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class RatingService {
     private final RatingRepository ratingRepository;
     private final RestaurantService restaurantService;
+
+    public RatingService(RatingRepository ratingRepository, RestaurantService restaurantService) {
+        this.ratingRepository = ratingRepository;
+        this.restaurantService = restaurantService;
+    }
 
     public ReviewResponseDTO save(ReviewRequestDTO dto) {
         Rating rating = new Rating(null, dto.visitorId(), dto.restaurantId(), dto.rating(), dto.comment());
@@ -28,11 +31,9 @@ public class RatingService {
         Optional<Rating> ratingOpt = ratingRepository.findById(id);
         if (ratingOpt.isPresent()) {
             Long restaurantId = ratingOpt.get().getRestaurantId();
-            boolean removed = ratingRepository.remove(id);
-            if (removed) {
-                restaurantService.recalculateAverageRating(restaurantId);
-            }
-            return removed;
+            ratingRepository.deleteById(id);
+            restaurantService.recalculateAverageRating(restaurantId);
+            return true;
         }
         return false;
     }
