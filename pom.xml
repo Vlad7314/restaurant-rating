@@ -27,6 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
+    <net.bytebuddy.experimental>true</net.bytebuddy.experimental>
 		<java.version>17</java.version>
 	</properties>
 <dependencies>
